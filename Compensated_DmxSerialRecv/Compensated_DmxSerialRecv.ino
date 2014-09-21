@@ -34,6 +34,7 @@ const int RedPin =    9;  // PWM output pin for Red Light.
 const int GreenPin =  6;  // PWM output pin for Green Light.
 const int BluePin =   5;  // PWM output pin for Blue Light.
 
+const int ReversePin = 7; // NON-PWM pin to indicate the ship is in reverse
 #define RedDefaultLevel   100
 #define GreenDefaultLevel 200
 #define BlueDefaultLevel  255
@@ -50,6 +51,7 @@ void setup () {
   pinMode(RedPin,   OUTPUT); // sets the digital pin as output
   pinMode(GreenPin, OUTPUT);
   pinMode(BluePin,  OUTPUT);
+  pinMode(ReversePin, OUTPUT);
 }
 
 
@@ -63,9 +65,18 @@ void loop() {
    int greenInverse= DMXSerial.read(6);// these are not the same as specified in the
   int  blueInverse=DMXSerial.read(7);// DMXCommands.XML
     
+    //int readReverse=DMXSerial.read(8);// read status of the pin
+    
     analogWrite(RedPin,   redInverse);
     analogWrite(GreenPin, greenInverse);
     analogWrite(BluePin,  blueInverse);
+//    
+//    if(readReverse > 125){
+//     digitalWrite(ReversePin, HIGH); 
+//    }
+//    else{
+//      digitalWrite(ReversePin, LOW);
+//    }
 
   } else {
     // Show pure red color, when no data was received since 5 seconds or more.
