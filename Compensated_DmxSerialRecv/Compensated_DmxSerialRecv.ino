@@ -65,18 +65,18 @@ void loop() {
    int greenInverse= DMXSerial.read(6);// these are not the same as specified in the
   int  blueInverse=DMXSerial.read(7);// DMXCommands.XML
     
-    //int readReverse=DMXSerial.read(8);// read status of the pin
+    int readReverse=DMXSerial.read(8);// read status of the pin
     
     analogWrite(RedPin,   redInverse);
     analogWrite(GreenPin, greenInverse);
     analogWrite(BluePin,  blueInverse);
-//    
-//    if(readReverse > 125){
-//     digitalWrite(ReversePin, HIGH); 
-//    }
-//    else{
-//      digitalWrite(ReversePin, LOW);
-//    }
+    
+    if(readReverse < 125){
+     digitalWrite(ReversePin, LOW); 
+    }
+    else{
+      digitalWrite(ReversePin, HIGH);
+    }
 
   } else {
     // Show pure red color, when no data was received since 5 seconds or more.
